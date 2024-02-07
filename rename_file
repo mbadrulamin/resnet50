@@ -1,0 +1,21 @@
+import random
+import os
+
+def generate_hex_name():
+    """Generates a random hex name."""
+    # Generate a random 16-byte hex string.
+    hex_string = random.SystemRandom().getrandbits(128).to_bytes(16, 'big').hex()
+    return hex_string
+
+def rename_files(directory):
+    """Renames all of the files in a directory using random hex names."""
+    for filename in os.listdir(directory):
+        # Generate a random hex name.
+        new_filename = generate_hex_name() + ".jpg"
+
+        # Rename the file.
+        os.rename(os.path.join(directory, filename), os.path.join(directory, new_filename))
+
+# Rename all of the files in the directory.
+rename_files('/home/user2/Downloads/Testing Data/contact')
+print("FINISHED")
